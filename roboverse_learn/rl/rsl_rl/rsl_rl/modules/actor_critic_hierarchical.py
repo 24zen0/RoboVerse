@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # Copyright (c) 2021 ETH Zurich, Nikita Rudin
+from ctypes import sizeof
 import rootutils
 rootutils.setup_root(__file__, pythonpath=True)
 
@@ -143,6 +144,15 @@ class ActorCriticHierarchical(nn.Module):
             loaded_dict = torch.load(skill_resume_path, map_location=device)
         except:
             loaded_dict = torch.load(skill_resume_path, map_location="cuda:0")
+        print(f"Loaded {skill_args.task} policy from: {skill_resume_path}, with keys: {list(loaded_dict.keys())}")
+        print(f"[DEBUG] Current skill_policy.actor: {skill_policy.actor}")
+        print(f"[DEBUG] Current skill_policy.critic: {skill_policy.critic}")
+        print(f"[DEBUG] Current skill_policy.actor[0] weight shape: {skill_policy.actor[0].weight.shape}")
+        print(f"[DEBUG] Current skill_policy.critic[0] weight shape: {skill_policy.critic[0].weight.shape}")
+        print(f"[DEBUG] Loaded checkpoint keys:")
+        for k, v in loaded_dict['model_state_dict'].items():
+            if 'actor.0.weight' in k or 'critic.0.weight' in k:
+                print(f"  {k}: {v.shape}")
         skill_policy.load_state_dict(loaded_dict['model_state_dict'])
         skill_train_cfg.runner.resume_path = skill_resume_path
         skill_policy.freeze()

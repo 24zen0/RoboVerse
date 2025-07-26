@@ -47,13 +47,13 @@ class TaskBallCfgPPO(BaseHumanoidCfgPPO):
         skill_dict = {
             "h1_wrist_walking": {
                 "experiment_name": "h1_wrist_walking",
-                "load_run": "2025_0101_093233",
+                "load_run": "2025_0628_232507",
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },
             "h1_wrist_stepping": {
                 "experiment_name": "h1_wrist_stepping",
-                "load_run": "20250321_094203",
+                "load_run": "2025_0721_193319",
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },
@@ -121,10 +121,10 @@ class TaskBallCfg(BaseHumanoidCfg):
     c_frame_stack = 3
     command_dim = 6
     num_single_obs = 3 * num_actions + 6 + command_dim
+    # num_single_obs = 3 + 3 * num_actions + 6
     num_observations = int(frame_stack * num_single_obs)
     single_num_privileged_obs = 3 * num_actions + 33
     num_privileged_obs = int(c_frame_stack * single_num_privileged_obs)
-
     reward_functions: list[Callable] = [reward_torso_pos, reward_ball_pos]
     reward_weights: dict[str, float] = {
         "torso_pos": 1,

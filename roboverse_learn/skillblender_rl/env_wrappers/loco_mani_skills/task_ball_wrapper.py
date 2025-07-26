@@ -104,6 +104,7 @@ class TaskBallWrapper(HumanoidBaseWrapper):
             (
                 ball_goal_diff_obs,  # 3
                 root_ball_diff_obs,  # 3
+                # self.command_input_wo_clock,  # 3
                 q,  # |A|
                 dq,  # |A|
                 self.actions,
