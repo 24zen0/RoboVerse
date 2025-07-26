@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from roboverse_learn.skillblender_rl.utils import get_joint_reindexed_indices_from_substring
 import torch
 
 from metasim.cfg.scenario import ScenarioCfg
@@ -25,8 +26,11 @@ class TaskButtonWrapper(HumanoidBaseWrapper):
         self.env.handler.simulate()
         # prepare right arm indices for reward computation
         right_arm_joint_names = self.cfg.right_arm_joint_names
-        self.cfg.right_shoulder_pitch_index = self.env.handler.get_joint_reindexed_indices_from_substring(
-            self.robot.name, right_arm_joint_names
+        self.cfg.right_shoulder_pitch_index = get_joint_reindexed_indices_from_substring(
+            self.env.handler,
+            self.robot.name,
+            right_arm_joint_names,
+            self.device,
         )
 
     def _init_buffers(self):

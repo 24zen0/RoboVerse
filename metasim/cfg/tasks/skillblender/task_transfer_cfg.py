@@ -58,7 +58,7 @@ class TaskTransferCfgPPO(BaseHumanoidCfgPPO):
             },
             "h1_wrist_reaching": {
                 "experiment_name": "h1_wrist_reaching",
-                "load_run": "2025_0621_095651",
+                "load_run": "2025_0621_134216",
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },
@@ -69,7 +69,7 @@ class TaskTransferCfgPPO(BaseHumanoidCfgPPO):
         policy_class_name = "ActorCriticHierarchical"
         max_iterations = 15001
         save_interval = 500
-        experiment_name = "task_ball"
+        experiment_name = "task_transfer"
         run_name = ""
 
     policy = Policy()

@@ -118,6 +118,9 @@ class BaseHumanoidCfg(BaseLeggedTaskCfg):
 
     def __post_init__(self):
         super().__post_init__()
+        # TODO:Hardcoded for H1Wrist, can be extended for other humanoid robots
+        from metasim.cfg.robots.h1_wrist_cfg import H1WristCfg
+        self.robots = [H1WristCfg()]
         # set the number of actions based on the robot's joints if available
         if self.robots is not None:
             self.num_actions = self.robots[0].num_joints
