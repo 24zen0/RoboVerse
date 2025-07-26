@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from roboverse_learn.skillblender_rl.utils import get_joint_reindexed_indices_from_substring
 import torch
 
 from metasim.cfg.scenario import ScenarioCfg
@@ -13,6 +12,7 @@ from metasim.utils.humanoid_robot_util import (
     dof_vel_tensor,
 )
 from roboverse_learn.skillblender_rl.env_wrappers.base.base_humanoid_wrapper import HumanoidBaseWrapper
+from roboverse_learn.skillblender_rl.utils import get_joint_reindexed_indices_from_substring
 
 
 class TaskButtonWrapper(HumanoidBaseWrapper):
