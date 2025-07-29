@@ -18,9 +18,9 @@ import torch
 rootutils.setup_root(__file__, pythonpath=True)
 
 import wandb
-from rsl_rl.runners.on_policy_runner import OnPolicyRunner
 
 from metasim.cfg.scenario import ScenarioCfg
+from roboverse_learn.rl.rsl_rl.rsl_rl.runners.on_policy_runner import OnPolicyRunner
 from roboverse_learn.skillblender_rl.utils import get_args, get_log_dir, get_wrapper
 
 

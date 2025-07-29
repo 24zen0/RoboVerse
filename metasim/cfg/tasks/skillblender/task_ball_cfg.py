@@ -47,13 +47,13 @@ class TaskBallCfgPPO(BaseHumanoidCfgPPO):
         skill_dict = {
             "h1_wrist_walking": {
                 "experiment_name": "h1_wrist_walking",
-                "load_run": "2025_0101_093233",
+                "load_run": "2025_0628_232507",
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },
             "h1_wrist_stepping": {
                 "experiment_name": "h1_wrist_stepping",
-                "load_run": "20250321_094203",
+                "load_run": "2025_0721_193319",
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },

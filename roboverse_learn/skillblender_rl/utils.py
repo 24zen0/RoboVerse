@@ -92,7 +92,6 @@ def get_load_root_dir(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
 
 def get_load_path(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
     """Get the path to load the model from."""
-
     load_root = get_load_root_dir(args, scenario)
     if args.checkpoint == -1:
         models = [file for file in os.listdir(load_root) if "model" in file]
