@@ -65,17 +65,27 @@ def get_wrapper(task_id: str):
 
 
 def get_log_dir(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
-    """Get the log directory."""
+    """Generate and return the log directory path using run_name"""
 
     robot_name = args.robot
     task_name = scenario.task.task_name
     task_name = f"{robot_name}_{task_name}"
-    now = datetime.datetime.now().strftime("%Y_%m%d_%H%M%S")
-    log_dir = f"./outputs/skillblender/{task_name}/{now}/"
+    # Use run_name if provided, otherwise fall back to timestamp
+    if hasattr(args, "run_name") and args.run_name is not None:
+        run_name = args.run_name
+    else:
+        run_name = datetime.datetime.now().strftime("%Y_%m%d_%H%M%S")
+
+    log_dir = f"./outputs/skillblender/{task_name}/{run_name}/"
     if not os.path.exists(log_dir):
         os.makedirs(log_dir, exist_ok=True)
     log.info("Log directory: {}", log_dir)
     return log_dir
+
+
+def should_load_model(args: argparse.Namespace) -> bool:
+    """Check if we should load a model based on resume flag and load_run argument."""
+    return args.resume and args.load_run is not None
 
 
 def get_load_root_dir(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
@@ -102,6 +112,22 @@ def get_load_path(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
     else:
         load_path = f"{load_root}/model_{args.checkpoint}.pt"
     return load_path
+
+
+def get_load_path_safe(args: argparse.Namespace, scenario: ScenarioCfg) -> str | None:
+    """Get the path to load the model from, or None if no model should be loaded."""
+    if args.resume and args.load_run is None:
+        log.error("--resume flag requires --load_run to specify which run to resume from")
+        return None
+
+    if not should_load_model(args):
+        return None
+
+    try:
+        return get_load_path(args, scenario)
+    except ValueError as e:
+        log.warning(f"Could not get load path: {e}")
+        return None
 
 
 def get_export_jit_path(args: argparse.Namespace, scenario: ScenarioCfg) -> str:
