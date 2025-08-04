@@ -22,7 +22,7 @@ class TaskLiftWrapper(HumanoidBaseWrapper):
     def __init__(self, scenario: ScenarioCfg):
         super().__init__(scenario)
         _, _ = self.env.reset(self.init_states)
-        self.env.handler.simulate(self.init_states)
+        self.env.handler.simulate()
 
     def _init_buffers(self):
         super()._init_buffers()

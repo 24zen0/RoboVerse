@@ -61,6 +61,12 @@ class TaskCarryCfgPPO(BaseHumanoidCfgPPO):
                 "checkpoint": -1,
                 "low_high": (-1, 1),
             },
+            "h1_wrist_squatting": {
+                "experiment_name": "h1_wrist_squatting",
+                "load_run": "2025_0730_003153",
+                "checkpoint": -1,
+                "low_high": (-1, 1),
+            },
         }
 
     @configclass
